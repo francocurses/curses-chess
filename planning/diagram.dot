@@ -1,0 +1,9 @@
+digraph {
+    Game -> Player1
+    Game -> Board
+    Game -> Player2
+    Player1 -> "Pieces (w)"
+    Player2 -> "Pieces (b)"
+    Board -> "Pieces (w)"
+    Board -> "Pieces (b)"
+}
