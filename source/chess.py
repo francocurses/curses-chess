@@ -16,17 +16,20 @@ def main(stdscr):
     prompt = Prompt(stdscr)
     display = Display(stdscr)
 
+    # draw initial display
+    display.drawboard(board)
+
     # game loop
     turn = 0
     while True:
         player = players[turn%2]
         move = prompt.getmove()
-        valid,win = board.applymove(player,move)
-        if not valid:
-            prompt.printinvalid()
+        report = board.applymove(player,move)
+        if not report["valid"]:
+            prompt.printinvalid(report)
             continue
         display.drawboard(board)
-        if win:
+        if report.win:
             prompt.declarewinner(player)
             display.freeze()
         turn+=1

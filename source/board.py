@@ -21,12 +21,33 @@ class Board():
             self.matrix[pos.y,pos.x] = piece
 
     def applymove(self,player,move):
+        """
+        Apply the input move into the board.
+        Invalid moves do nothing. The results
+        of the move are returned in report
+        dictionary.
+        """
+        # init empty report
+        global report
+        report = {}
+
         # check move validity
-        valid = self.validatemove(self,player,move)
+        self.validatemove(player,move)
 
         # update board with move
-        if valid:
-            win = self.update(move)
+        if report["valid"]:
+            self.update(move,report)
+        
+        return report
+    
+    def validatemove(self,player,move):
+        """
+        Check if move is a valid move for the
+        player.
+        """
+        # TODO
+        global report
+        report["valid"] = False
 
 def getposs(n):
     """

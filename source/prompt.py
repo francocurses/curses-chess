@@ -23,6 +23,17 @@ class Prompt():
 
     def getmove(self):
         """
-        Read the input from the player.
+        Read the input from the player and
+        translate it into a move object.
         """
+        # TODO
         return None
+
+    def printinvalid(self,report):
+        """
+        Print a message for an invalid move in the
+        chess board.
+        """
+        self.ow2.addstr(0,0,"Invalid move.")
+        self.ow2.refresh()
+

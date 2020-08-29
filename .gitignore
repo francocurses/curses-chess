@@ -1,2 +1,3 @@
 *.swp
 source/__pycache__/
+source/log.txt
