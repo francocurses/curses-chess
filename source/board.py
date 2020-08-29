@@ -5,7 +5,7 @@ class Board():
     The chessboard.
     """
     def __init__(self,players):
-        self.matrix = np.empty(8,8,object)
+        self.matrix = np.empty((8,8),object)
         
         # add chess pieces
         self.add_chesspieces(0,players[0])
@@ -16,9 +16,17 @@ class Board():
         Add chess pieces to the board.
         """
         poss = getposs(n)
-        pieces = player.pieces()
-        for pos, piece in zip(poss,pieces)
+        pieces = player.pieces
+        for pos, piece in zip(poss,pieces):
             self.matrix[pos.y,pos.x] = piece
+
+    def applymove(self,player,move):
+        # check move validity
+        valid = self.validatemove(self,player,move)
+
+        # update board with move
+        if valid:
+            win = self.update(move)
 
 def getposs(n):
     """

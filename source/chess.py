@@ -1,4 +1,8 @@
 from curses import *
+from player import Player
+from board import Board
+from prompt import Prompt
+from display import Display
 
 def main(stdscr):
     # initialize curses
@@ -16,8 +20,11 @@ def main(stdscr):
     turn = 0
     while True:
         player = players[turn%2]
-        move = prompt.getmove(player,board)
-        win = board.update(move)
+        move = prompt.getmove()
+        valid,win = board.applymove(player,move)
+        if not valid:
+            prompt.printinvalid()
+            continue
         display.drawboard(board)
         if win:
             prompt.declarewinner(player)
