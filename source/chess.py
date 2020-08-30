@@ -23,13 +23,14 @@ def main(stdscr):
     turn = 0
     while True:
         player = players[turn%2]
+        prompt.updateplayer(player)
         move = prompt.getmove()
         report = board.applymove(player,move)
         if not report["valid"]:
             prompt.printinvalid(report)
             continue
         display.drawboard(board)
-        if report.win:
+        if report["win"]:
             prompt.declarewinner(player)
             display.freeze()
         turn+=1

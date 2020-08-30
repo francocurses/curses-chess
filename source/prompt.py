@@ -11,7 +11,7 @@ class Prompt():
 
         # define prompt windows:
         # prompt window
-        self.pw = newwin(3,COLS,10,0)
+        self.pw = newwin(3,COLS,12,0)
         # input text
         istr = "Input move: "
         self.pw.addstr(0,0,istr)
@@ -20,6 +20,17 @@ class Prompt():
         # ouput windows
         self.ow1 = self.pw.derwin(1,COLS,1,0)
         self.ow2 = self.pw.derwin(1,COLS,2,0)
+
+        # refresh windows
+        self.pw.refresh()
+
+    def updateplayer(self,player):
+        """
+        Update the player in the output window.
+        """
+        name = player.name
+        self.ow1.addstr(0,0,name+"'s turn")
+        self.ow1.refresh()
 
     def getmove(self):
         """
@@ -34,6 +45,6 @@ class Prompt():
         Print a message for an invalid move in the
         chess board.
         """
-        self.ow2.addstr(0,0,"Invalid move.")
+        self.ow2.addstr(0,0,"Invalid move")
         self.ow2.refresh()
 

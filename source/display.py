@@ -1,6 +1,5 @@
 from curses import *
 import _curses
-from logger import *
 
 class Display():
     """
