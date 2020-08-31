@@ -26,8 +26,8 @@ def main(stdscr):
         prompt.updateplayer(player)
         move = prompt.getmove()
         report = board.applymove(player,move)
-        if not report["valid"]:
-            prompt.printinvalid(report)
+        if not report["legal"]:
+            prompt.printilegal(report)
             continue
         display.drawboard(board)
         if report["win"]:

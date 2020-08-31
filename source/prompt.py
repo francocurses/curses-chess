@@ -16,7 +16,7 @@ class Prompt():
         istr = "Input move: "
         self.pw.addstr(0,0,istr)
         # input window
-        self.iw = self.pw.derwin(1,2,0,len(istr))
+        self.iw = self.pw.derwin(1,6,0,len(istr))
         # ouput windows
         self.ow1 = self.pw.derwin(1,COLS,1,0)
         self.ow2 = self.pw.derwin(1,COLS,2,0)
@@ -37,14 +37,30 @@ class Prompt():
         Read the input from the player and
         translate it into a move object.
         """
-        # TODO
-        return None
+        while True:
+            s = self.iw.getstr()
+            self.iw.clear()
+            report = parsemove(s.decode())
+            if report["valid"]:
+                break
+            self.ow2.addstr(0,0,"Invalid move")
+            self.ow2.refresh()
+        return report["move"]
 
-    def printinvalid(self,report):
+    def printilegal(self,report):
         """
-        Print a message for an invalid move in the
+        Print a message for an ilegal move in the
         chess board.
         """
-        self.ow2.addstr(0,0,"Invalid move")
+        self.ow2.addstr(0,0,"Ilegal move")
         self.ow2.refresh()
 
+def parsemove(s):
+    """
+    Transtale a string into a Move object that
+    the chess board can uae to update the game.
+    It return valid=False if the move can not
+    be parsed.
+    """
+    report = {"valid" : False}
+    return report

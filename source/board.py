@@ -31,23 +31,23 @@ class Board():
         global report
         report = {}
 
-        # check move validity
-        self.validatemove(player,move)
+        # check move legality
+        self.legalizemove(player,move)
 
         # update board with move
-        if report["valid"]:
+        if report["legal"]:
             self.update(move,report)
         
         return report
     
-    def validatemove(self,player,move):
+    def legalizemove(self,player,move):
         """
-        Check if move is a valid move for the
+        Check if move is a legal move for the
         player.
         """
         # TODO
         global report
-        report["valid"] = False
+        report["legal"] = False
 
 def getposs(n):
     """
