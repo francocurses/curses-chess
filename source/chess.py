@@ -9,8 +9,8 @@ def main(stdscr):
     initcurses(stdscr)
 
     # game objects
-    player1 = Player("White",A_NORMAL)
-    player2 = Player("Black",A_DIM)
+    player1 = Player("White","♙♘♗♖♕♔")
+    player2 = Player("Black","♟︎♞♝♜♛♚")
     players = [player1,player2]
     board = Board(players)
     prompt = Prompt(stdscr)

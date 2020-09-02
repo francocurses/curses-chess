@@ -10,9 +10,9 @@ class Display():
         init_pair(1,COLOR_RED,COLOR_BLACK)
         self.red = color_pair(1)
         init_pair(2,COLOR_BLACK,COLOR_YELLOW)
-        self.bkgy = color_pair(2)
+        self.bkg1 = color_pair(2)
         init_pair(3,COLOR_BLACK,COLOR_GREEN)
-        self.bkgg = color_pair(3)
+        self.bkg2 = color_pair(3)
 
         # display window
         self.dw = newwin(12,12,0,0)
@@ -50,7 +50,7 @@ class Display():
         is None, then draw nothing.
         """
         # choose color depending in position
-        color = self.bkgy if (x+y)%2 else self.bkgg
+        color = self.bkg1 if (x+y)%2 else self.bkg2
     
         # draw piece character
         char = " "
