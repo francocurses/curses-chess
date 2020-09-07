@@ -7,11 +7,11 @@ class Display():
     """
     def __init__(self,stdscr):
         # used colors and attributes
-        init_pair(1,COLOR_RED,COLOR_BLACK)
-        self.red = color_pair(1)
-        init_pair(2,COLOR_BLACK,COLOR_YELLOW)
+        init_pair(1,COLOR_WHITE,COLOR_BLACK)
+        self.coo = color_pair(1)
+        init_pair(2,COLOR_BLACK,COLOR_WHITE)
         self.bkg1 = color_pair(2)
-        init_pair(3,COLOR_BLACK,COLOR_GREEN)
+        init_pair(3,COLOR_BLACK,8)
         self.bkg2 = color_pair(3)
 
         # display window
@@ -19,11 +19,11 @@ class Display():
         self.dw.box()
 
         # draw coordinates in window
-        self.dw.addstr(1, 2,"abcdefgh",self.red)
-        self.dw.addstr(10,2,"abcdefgh",self.red)
+        self.dw.addstr(1, 2,"abcdefgh",self.coo)
+        self.dw.addstr(10,2,"abcdefgh",self.coo)
         for i in range(1,9):
-            self.dw.addstr(10-i, 1,str(i),self.red)
-            self.dw.addstr(10-i,10,str(i),self.red)
+            self.dw.addstr(10-i, 1,str(i),self.coo)
+            self.dw.addstr(10-i,10,str(i),self.coo)
 
         # board window
         self.bw = self.dw.derwin(8,8,2,2)

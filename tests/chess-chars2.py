@@ -1,7 +1,7 @@
 wp = "♙♘♗♖♕♔"
 wp = "♙"
 bp = "♟︎♞♝♜♛♚"
-bp = "♟︎"
+bp = "♟"
 
 print(len(wp))
 print(len(bp))

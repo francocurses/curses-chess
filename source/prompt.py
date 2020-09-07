@@ -1,4 +1,5 @@
 from curses import *
+from parser import Parser
 
 class Prompt():
     """
@@ -8,6 +9,9 @@ class Prompt():
     def __init__(self,stdscr):
         # get screen size
         (ROWS,COLS) = stdscr.getmaxyx()
+        
+        # create move parser
+        self.parser = Parser()
 
         # define prompt windows:
         # prompt window
@@ -39,8 +43,9 @@ class Prompt():
         """
         while True:
             s = self.iw.getstr()
+            s = decode()
             self.iw.clear()
-            report = parsemove(s.decode())
+            report = self.parser.parsemove(s)
             if report["valid"]:
                 break
             self.ow2.addstr(0,0,"Invalid move")
