@@ -20,25 +20,21 @@ class Board():
         for pos, piece in zip(poss,pieces):
             self.matrix[pos.y,pos.x] = piece
 
-    def applymove(self,player,move):
+    def update(self,player,move):
         """
         Apply the input move into the board.
         Invalid moves do nothing. The results
         of the move are returned in report
         dictionary.
         """
-        # init empty report
-        global report
-        report = {}
-
         # check move legality
-        self.legalizemove(player,move)
+        legal = self.legalizemove(player,move)
 
         # update board with move
-        if report["legal"]:
-            self.update(move,report)
+        if legal:
+            self.applymove(player,move)
         
-        return report
+        return legal
     
     def legalizemove(self,player,move):
         """
@@ -46,8 +42,7 @@ class Board():
         player.
         """
         # TODO
-        global report
-        report["legal"] = False
+        return False
 
 def getposs(n):
     """

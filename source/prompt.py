@@ -1,5 +1,4 @@
 from curses import *
-from parser import Parser
 
 class Prompt():
     """
@@ -10,9 +9,6 @@ class Prompt():
         # get screen size
         (ROWS,COLS) = stdscr.getmaxyx()
         
-        # create move parser
-        self.parser = Parser()
-
         # define prompt windows:
         # prompt window
         self.pw = newwin(3,COLS,12,0)
@@ -41,31 +37,23 @@ class Prompt():
         Read the input from the player and
         translate it into a move object.
         """
-        while True:
-            s = self.iw.getstr()
-            s = decode()
-            self.iw.clear()
-            report = self.parser.parsemove(s)
-            if report["valid"]:
-                break
-            self.ow2.addstr(0,0,"Invalid move")
-            self.ow2.refresh()
-        return report["move"]
+        string = self.iw.getstr()
+        string = string.decode()
+        self.iw.clear()
+        return string
 
-    def printilegal(self,report):
+    def printinvalid(self):
+        """
+        Print a message for an invalid move was
+        input in the prompt.
+        """
+        self.ow2.addstr(0,0,"Invalid move")
+        self.ow2.refresh()
+
+    def printilegal(self):
         """
         Print a message for an ilegal move in the
         chess board.
         """
         self.ow2.addstr(0,0,"Ilegal move")
         self.ow2.refresh()
-
-def parsemove(s):
-    """
-    Transtale a string into a Move object that
-    the chess board can uae to update the game.
-    It return valid=False if the move can not
-    be parsed.
-    """
-    report = {"valid" : False}
-    return report
