@@ -1,3 +1,4 @@
+from move import Move
 from pieces.pawn import Pawn
 from pieces.knight import Knight
 from pieces.bishop import Bishop
@@ -50,7 +51,7 @@ class Parser():
         - pawn non-promotion move
         """
         iscoor,y,x = self.check_coor(s)
-        if not iscoor:
+        if iscoor:
             return genmove(Pawn,y,x)
         return False,None
 
@@ -70,6 +71,25 @@ class Parser():
             return genmove(Pawn,yf,xf,xi=xi)
         return False,None
 
+    def parse_4charsmove(self,s):
+        """
+        Parse 4 characters move. Cases:
+        - main piece diambiguation move
+        - pawn promotion diambiguation move
+        """
+        #TODO
+        return False,None
+
+    def parse_5charsmove(self,s):
+        """
+        Parse 5 characters move. Cases:
+        - The very rare case of double
+            diambiguation move
+        - Queen side castle
+        """
+        #TODO
+        return False,None
+
     def check_coor(self,s):
         """
         Check if string s represents a coordinate.
@@ -80,6 +100,34 @@ class Parser():
         isrow,x = self.check_row(s[1])
         iscoor = iscol&isrow
         return iscoor,y,x
+
+    def check_mpiece_move(self,s):
+        """
+        Check if string is a move from a main
+        piece. Return false if not. Return
+        piece class and coordinates if true.
+        """
+        ismpiece,p = self.check_mpiece(s[0])
+        if not ismpiece:
+            return False,None,None,None
+        iscoor,y,x = self.check_coor(s[1:])
+        if not iscoor:
+            return False,None,None,None
+        return True,p,y,x
+
+    def check_pawnd_move(self,s):
+        """
+        Check if string is a diambiguation pawn
+        move. Return false if not. Return final
+        coordinates and initial column if true.
+        """
+        iscol,xi = self.check_col(s[0])
+        if not iscol:
+            return False,None,None,None
+        iscoor,yf,xf = self.check_coor(s[1:])
+        if not iscoor:
+            return False,None,None,None
+        return True,yf,xf,xi
 
     def check_col(self,s):
         iscol = s in self.cols
@@ -95,26 +143,18 @@ class Parser():
             return isrow,x
         return False,None
 
-    def check_mpiece_move(self,s):
-        """
-        Check if string is a move from a main
-        piece. Return false if not. Return
-        piece class and coordinates if true.
-        """
-        if s[0] not in self.pdict.keys():
-            return False,None,None,None
-        p = self.pdict[s[0]]
-        iscoor,y,x = self.check_coor(s[1:])
-        if not iscoor:
-            return False,None,None,None
-        return True,p,y,x
+    def check_mpiece(self,s):
+        if s not in self.pdict.keys():
+            return False,None
+        return True,self.pdict[s]
 
-def genmove(piece,yf,xf,yi=None,xi=None):
+def genmove(piece,yf,xf,yi=None,xi=None,pr=None):
     """
     Generate a move given a piece, an its
     coordinates.
     """
-    return True, Move(piece,yf,xf,yi,xi)
+    return True, Move(piece,yi=yi,xi=xi,yf=yf,
+            promote=pr)
 
 class Move():
     """

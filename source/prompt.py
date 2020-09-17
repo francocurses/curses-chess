@@ -42,6 +42,12 @@ class Prompt():
         self.iw.clear()
         return string
 
+    def cleaninfo(self):
+        """
+        Clean move prompt info.
+        """
+        self.ow2.clear()
+
     def printinvalid(self):
         """
         Print a message for an invalid move was

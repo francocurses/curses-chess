@@ -30,6 +30,8 @@ class Player():
         self.rook1 = Rook(self.rchar)
         self.rook2 = Rook(self.rchar)
         self.rooks = [self.rook1,self.rook2]
+
+        # king queen
         self.queen = Queen(self.qchar)
         self.king = King(self.kchar)
 

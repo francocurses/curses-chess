@@ -28,21 +28,36 @@ class Board():
         dictionary.
         """
         # check move legality
-        legal = self.legalizemove(player,move)
+        legal,move = self.legalizemove(player,move)
 
         # update board with move
         if legal:
-            self.applymove(player,move)
+            self.applymove(move)
         
         return legal
     
     def legalizemove(self,player,move):
         """
         Check if move is a legal move for the
-        player.
+        player. Steps:
+        - get the piece type
+        - get the individual piece
+        - check if the piece can move to the
+            desired destination
         """
-        # TODO
-        return False
+        plist = identifypiece(player,move.pclass)
+        #TODO: get individual piece
+        move.piece = plist[0]
+        
+        return True,move
+
+    def applymove(self,move):
+        """
+        Apply the move in the board.
+        """
+        self.removepiece(move.capture)
+        self.movepiece(move)
+        self.promotepiece(move)
 
 def getposs(n):
     """
@@ -63,6 +78,23 @@ def getposs(n):
         mposs.append(Pos(mrow,i))
 
     return pposs + mposs
+
+def identifypiece(player,pc):
+    """
+    Return the piece list or piece from player
+    given piece class pc.
+    """
+    if pc is Pawn:
+        return player.pawns
+    if pc is Knight
+        return player.knights
+    if pc is Bishop:
+        return player.bishops
+    if pc is Queen:
+        return [player.queen]
+    if pc is King:
+        return [player.king]
+    return None
 
 class Pos():
     """

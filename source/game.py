@@ -70,6 +70,7 @@ class Game():
         # get+apply move
         while True:
             s = self.prompt.getmove()
+            self.prompt.cleaninfo()
             v,m = self.parser.parsemove(s)
             if not v: # invalid move
                 self.prompt.printinvalid()
@@ -79,6 +80,9 @@ class Game():
             if not l: # ilegal move
                 self.prompt.printilegal()
                 continue
+
+        # display new board
+        self.display.drawboard(self.board)
 
     def checkfinish(self):
         """
