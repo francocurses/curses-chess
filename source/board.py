@@ -23,9 +23,8 @@ class Board():
     def update(self,player,move):
         """
         Apply the input move into the board.
-        Invalid moves do nothing. The results
-        of the move are returned in report
-        dictionary.
+        Invalid moves do nothing, and a false
+        value is returned.
         """
         # check move legality
         legal,move = self.legalizemove(player,move)
@@ -48,6 +47,7 @@ class Board():
         plist = identifypiece(player,move.pclass)
         #TODO: get individual piece
         move.piece = plist[0]
+        #TODO: check move validity
         
         return True,move
 
@@ -58,6 +58,19 @@ class Board():
         self.removepiece(move.capture)
         self.movepiece(move)
         self.promotepiece(move)
+
+    def removepiece(self,move):
+        """
+        Remove a piece from the board.
+        Used  when a piece is captured.
+        """
+        # remove piece from board
+        y = move.capture.y
+        x = move.capture.x
+        self.matrix[y,x] = None
+
+        # remove piece from player list
+
 
 def getposs(n):
     """

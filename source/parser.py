@@ -156,15 +156,3 @@ def genmove(piece,yf,xf,yi=None,xi=None,pr=None):
     return True, Move(piece,yi=yi,xi=xi,yf=yf,
             promote=pr)
 
-class Move():
-    """
-    A move parsed from string in algebraic 
-    notation.
-    """
-    def __init__(self,piece,yf,xf,yi=None,xi=None):
-        self.piece = piece
-        self.yf = yf
-        self.xf = xf
-        self.yi = yi
-        self.xi = xi
-

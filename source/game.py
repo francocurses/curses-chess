@@ -63,8 +63,8 @@ class Game():
         - Update board with move
         """
         # update player
-        cp = self.currplayer
         cp = self.players[self.turn%2]
+        self.currplayer = cp
         self.prompt.updateplayer(cp)
 
         # get+apply move
@@ -96,17 +96,3 @@ class Game():
         """
         self.prompt.finishmessage(self.wplayer)
         self.stdscr.getkey()
-
-#    while True:
-#        player = players[turn%2]
-#        prompt.updateplayer(player)
-#        move = prompt.getmove()
-#        report = board.applymove(player,move)
-#        if not report["legal"]:
-#            prompt.printilegal(report)
-#            continue
-#        display.drawboard(board)
-#        if report["win"]:
-#            prompt.declarewinner(player)
-#            display.freeze()
-#        turn+=1
